@@ -13,7 +13,7 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    1. Have the installation disk handy, boot into Win 8 and check that you are, indeed, in Legacy mode by running msinfo32.
    2. Open a terminal and run
    ``` diskpart
-    list disk```
+    list disk'''
    to find the name of the disk (corresponds to drive, not partition) with the Windows installation on it---if only using one drive, this is Disk 0.
    3. Download and unzip [gptgen](http://gptgen.sourceforge.net/), then run
    `gptgen.exe -w \\.\physicaldrive0
