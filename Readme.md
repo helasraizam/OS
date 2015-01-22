@@ -43,27 +43,27 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    		```
 
    	6. Create the new partitions:
-   	```
+   	   ```
 		create partition EFI size=100 offset=1
    		format quick fs=fat32 label="System"
    		assign letter=S
    		create partition msr size=128 offset=103424
-    ```
+    	```
    	7. Mount the Windows installation partition
-   	```
-   	list volume
-   	```
-   	Select the Windows installation volume (the larger one)
-   	```
-   	select volume 3
-   	assign letter=C
-   	```
+   	   ```
+   	   list volume
+   	   ```
+   	   Select the Windows installation volume (the larger one)
+   	   ```
+   	   select volume 3
+   	   assign letter=C
+   	   ```
    
 	8. Exit and regenerate the boot partition data:
-   	```
-   	exit
-   	bcdboot c:\windows /s s: /f UEFI
-   	```
+   	   ```
+   	   exit
+   	   bcdboot c:\windows /s s: /f UEFI
+   	   ```
 
 Troubleshooting
 ---------------
