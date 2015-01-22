@@ -78,7 +78,7 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 		 click `settings that are currently unavailable`, and remove `Turn on fast startup (recommended)`.
 	2. Disable secureboot through the BIOS
 		 
-	3. Using regedit, change
+	3. [Set Windows HW clock to UTC](Set Windows to ) Using regedit; change
 	    ```
 		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal
 		```
