@@ -1,0 +1,10 @@
+#
+# ~/.xprofile
+# Programs to be run with startx
+# https://wiki.archlinux.org/index.php/Xprofile
+#
+
+# This file made from scratch (https://wiki.archlinux.org/index.php/Xprofile)
+
+xcompmgr -c &
+/usr/bin/start-pulseaudio-x11

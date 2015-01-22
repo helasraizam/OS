@@ -1,0 +1,37 @@
+!
+! .Xdefaults
+! Made from scratch (https://bbs.archlinux.org/viewtopic.php?id=38403)
+!
+
+! urxvt
+! https://wiki.archlinux.org/index.php/rxvt-unicode#True_transparency
+
+URxvt*perl-ext: default,matcher,font-size
+
+! http://www.reddit.com/r/unixporn/comments/2e5eij/hlwm_playing_around_with_urxvts_pixmap_feature/
+URxvt*scrollBar: false
+URxvt*cursorUnderline: false
+URxvt*colorUL: #9695b5
+URxvt*internalBorder:0
+
+! https://bbs.archlinux.org/viewtopic.php?id=100918
+URxvt*font: xft:DejaVu Sans Mono:size=9
+URxvt*keysym.C-Up: perl:font-size:increase
+URxvt*keysym.C-Down: perl:font-size:decrease
+ 
+URxvt*keysym.Home: \033[1~
+URxvt*keysym.End: \033[4~
+
+! Sounds http://atsutane.de/blog/2013/05/14/irssi-screen-urxvt-the-urgency-hint/
+URxvt*urgentOnBell: true
+
+! hyperlinks https://bbs.archlinux.org/viewtopic.php?id=47795
+URxvt*urlLauncher: /usr/bin/firefox
+URxvt*matcher.button: 1
+ 
+!URxvt*geometry: 151x48
+URxvt*borderless: true
+ 
+!URxvt*backgroundPixmap: /home/nick/Pictures/invert_bg.xpm;op=root-align:style=root-tiled
+! This is how I got the inverted terminals
+! invert_bg is simply the background image but inverted 
