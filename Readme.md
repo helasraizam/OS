@@ -1,5 +1,5 @@
-Installing Win 8, Ubuntu, and Arch in UEFI/GPT
-==============================================
+Win 8, Ubuntu, and Arch in UEFI/GPT
+===================================
 
 Countless times I've reinstalled Windows 8, Ubuntu and Arch, so I'm writing myself a little notes section on how I can repeat it.  This may not work for your hardware.  Obviously filesystem work carries the risk (read consequence) of losing all of your files; I make no guarantee of these instructions and take no responsibility for your actions.
 
@@ -66,12 +66,19 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    	   ```
 
 3. Update Windows to 8.1 to avoid overwriting grub later.
-    1. First, fully upgrade Win 8 (~2h).
-	2. Then, upgrade to 8.1.
+    1. Upgrade to Windows 8.1 by going to the store, downloading, then upgrading.
+	2. Upgrade Windows and sync steam library and configs.
 4. Configure Windows for dual booting with Linux
-    1. Disable fastboot.
-	2. Disable some other things.
-	3. Set systohctime or something
+    1. [Disable fast boot](https://sites.google.com/site/easylinuxtipsproject/windows); go to
+	     > *Control Panel > Power Options > Choose what the power buttons do*,
+		 click `settings that are currently unavailable`, and remove `Turn on fast startup (recommended)`.
+	2. Disable secureboot through the BIOS
+		 
+	3. Using regedit, change
+	    ```
+		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal
+		```
+		to a DWORD of hexadecimal value 1.
 	
 5. Partition the drive.  I'm currently working with
     > four_windows_partitions(150G) Ubuntu(~150G) swap(10G) Files(~150G) swap(10G) Arch(~150G) [recovery partition, etc]
