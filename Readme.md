@@ -66,7 +66,7 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    	   ```
 
 3. Update Windows to 8.1 to avoid overwriting grub later.
-    1. First, fully upgrade Win 8 (~1G).
+    1. First, fully upgrade Win 8 (~2h).
 	2. Then, upgrade to 8.1.
 4. Configure Windows for dual booting with Linux
     1. Disable fastboot.
@@ -82,7 +82,7 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 
 8. Update repositories and upgrade Ubuntu
 
-9. Update and [configure](Arch/ArchConfig.sh)
+9. Update and [configure](Arch/ArchConfig.sh) Arch.
 
 10. Study for your quals tomorrow.
 
