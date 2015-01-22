@@ -66,8 +66,12 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    	   ```
 	   
 3. **Update Windows to 8.1** to avoid overwriting grub later.
-    1. Upgrade to Windows 8.1 by going to the store, downloading, then upgrading.
+    1. Upgrade to Windows 8.1 by going to the store and downloading it.  It will install and update automatically, rebooting in the process. [~2.5 hrs]
 	2. Upgrade Windows and sync steam library and configs.
+	    1. Install and sync firefox, emacs, gimp, flash, java, vlc, libreoffice, [etc.].
+		2. Check all settings in menu.
+		3. Install steam and nvidia, upgrade and download overnight.
+	
 4. **Configure Windows** for dual booting with Linux
     1. [Disable fast boot](https://sites.google.com/site/easylinuxtipsproject/windows); go to
 	     *Control Panel > Power Options > Choose what the power buttons do*,
