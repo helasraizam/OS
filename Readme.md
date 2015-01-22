@@ -68,7 +68,7 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 3. **Update Windows to 8.1** to avoid overwriting grub later.
     1. Upgrade to Windows 8.1 by going to the store and downloading it.  It will install and update automatically, rebooting in the process. [~2.5 hrs]
 	2. Upgrade Windows and sync steam library and configs.
-	    1. Install and sync firefox, emacs, gimp, flash, java, vlc, libreoffice, [etc.].
+	    1. Install and sync firefox, emacs, gimp, flash, java, vlc, libreoffice, dropbox, [etc.].
 		2. Check all settings in menu.
 		3. Install steam and nvidia, upgrade and download overnight.
 	
@@ -78,31 +78,26 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 		 click `settings that are currently unavailable`, and remove `Turn on fast startup (recommended)`.
 	2. Disable secureboot through the BIOS
 		 
-	3. [Set Windows HW clock to UTC](Set Windows to ) Using regedit; change
+	3. [Set Windows HW clock to UTC](Set Windows to ) using regedit; change
 	    ```
 		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal
 		```
 		to a DWORD of hexadecimal value 1.
 
-Step 2: Install Arch and Grub
------------------------------
+Step 2: Install Ubuntu
+----------------------
 1. **Partition the hard drive** using an Ubuntu livedisk, leaving the first four Win8 partitions be, to Ubuntu (~150g), its swap (~10g), the files (~150g), the Arch swap (~10g), and Arch (~150g).  Any recovery partitions, etc can also be added.  Everything but Windows should be ext4/swap.
+2. **Install Ubuntu** with grub.
+3. **Upgrade Ubuntu** by enabling and introducing the proper repositories, updating, and downloading a few select apps.
+4. **Update configs** (to be added)
+5. **Delete grub** files on the second partition and *do not reboot* without installing Arch and its grub.
 
-2. **Install Arch** and grub (*do not delete /boot!*)
-
-Step 3: Install Ubuntu without Grub
------------------------------------
-Install Ubuntu without grub (figure out how to disable grub install)
-
-Step 4: Update the Operating Systems
-------------------------------------
-1. Update repositories and upgrade Ubuntu
-
-2. Update and [configure](Arch/ArchConfig.sh) Arch.
-
-Step 0: Don't do this before your qualifying exams..
-----------------------------------------------------
-Study for your quals tomorrow.
+Step 3: Install Arch
+--------------------
+1. Still in the Ubuntu installation, install arch over arch-chroot from the provided tar.gz
+    1. Make sure to mount /boot; Arch will keep Windows files.
+2. Reboot when ready into Arch, complete installation, then [upgrade configs](Arch/ArchConfig.sh).
+3. Cross fingers and reboot into newly installed system!
 
 
 Troubleshooting
