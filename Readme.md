@@ -17,33 +17,57 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    list disk
 	```
    to find the name of the disk (corresponds to drive, not partition) with the Windows installation on it---if only using one drive, this is Disk 0.
+   
    3. Download and unzip [gptgen](http://gptgen.sourceforge.net/), then run
-   `gptgen.exe -w \\.\physicaldrive0
+   ```
+   gptgen.exe -w \\.\physicaldrive0
+   ```
    replacing 0 with your drive, if need be.  **Be prepared for BSOD at this point.**
+   
    4. Boot into installation disk and get to the command prompt:
-   ` *Repair Your Computer > Troubleshoot > Advanced > Command Prompt
+   ```
+   *Repair Your Computer > Troubleshoot > Advanced > Command Prompt*
+   ```
+   
    5. Delete the MBR partition using diskpart:
-   ` diskpart
-   ` list disk
+   ```
+   diskpart
+   list disk
+   ```
    Select the Windows directory drive:
-   ` select disk 0
-   ` list partition
+   ```
+   select disk 0
+   list partition
+   ```
    Select and delete the MBR partition (350 mb, 1024 kb offset, usually Partition 1):
-   ` select partition 1
-   ` delete partition
+   ```
+   select partition 1
+   delete partition
+   ```
+
    6. Create the new partitions:
-   ` create partition EFI size=100 offset=1
-   ` format quick fs=fat32 label="System"
-   ` assign letter=S
-   ` create partition msr size=128 offset=103424
+   ```
+   create partition EFI size=100 offset=1
+   format quick fs=fat32 label="System"
+   assign letter=S
+   create partition msr size=128 offset=103424
+   ```
+   
    7. Mount the Windows installation partition
-   ` list volume
+   ```
+   list volume
+   ```
    Select the Windows installation volume (the larger one)
-   ` select volume 3
-   ` assign letter=C
+   ```
+   select volume 3
+   assign letter=C
+   ```
+   
    8. Exit and regenerate the boot partition data:
-   ` exit
-   ` bcdboot c:\windows /s s: /f UEFI
+   ```
+   exit
+   bcdboot c:\windows /s s: /f UEFI
+   ```
 
 Troubleshooting
 ---------------
