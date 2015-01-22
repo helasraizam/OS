@@ -16,7 +16,8 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 		diskpart
 		list disk
 		```
-   	to find the name of the disk (corresponds to drive, not partition) with the Windows installation on it---if only using one drive, this is Disk 0.
+   		to find the name of the disk (corresponds to drive, not partition) with the Windows installation on it---if only using one drive, this is Disk 0.
+	
 	3. Download and unzip [gptgen](http://gptgen.sourceforge.net/), then run
    	   ```
    	   gptgen.exe -w \\.\physicaldrive0
@@ -26,7 +27,7 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 		> *Repair Your Computer > Troubleshoot > Advanced > Command Prompt*
    
 	5. Delete the MBR partition using diskpart:
-   	   ```
+   	    ```
 		diskpart
    		list disk
    		```
