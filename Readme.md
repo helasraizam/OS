@@ -22,7 +22,6 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    	   gptgen.exe -w \\.\physicaldrive0
    	   ```
    	   replacing 0 with your drive, if need be.  **Be prepared for BSOD at this point.**
-   
 	4. Boot into installation disk and get to the command prompt:
 		> *Repair Your Computer > Troubleshoot > Advanced > Command Prompt*
    
