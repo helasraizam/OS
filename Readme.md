@@ -64,13 +64,13 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    	   exit
    	   bcdboot c:\windows /s s: /f UEFI
    	   ```
-
-3. Update Windows to 8.1 to avoid overwriting grub later.
+	   
+3. **Update Windows to 8.1** to avoid overwriting grub later.
     1. Upgrade to Windows 8.1 by going to the store, downloading, then upgrading.
 	2. Upgrade Windows and sync steam library and configs.
-4. Configure Windows for dual booting with Linux
+4. **Configure Windows** for dual booting with Linux
     1. [Disable fast boot](https://sites.google.com/site/easylinuxtipsproject/windows); go to
-	     > *Control Panel > Power Options > Choose what the power buttons do*,
+	     *Control Panel > Power Options > Choose what the power buttons do*,
 		 click `settings that are currently unavailable`, and remove `Turn on fast startup (recommended)`.
 	2. Disable secureboot through the BIOS
 		 
@@ -79,19 +79,26 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 		HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal
 		```
 		to a DWORD of hexadecimal value 1.
-	
-5. Partition the drive.  I'm currently working with
-    > four_windows_partitions(150G) Ubuntu(~150G) swap(10G) Files(~150G) swap(10G) Arch(~150G) [recovery partition, etc]
 
-6. Install Arch and grub
+Step 2: Install Arch and Grub
+-----------------------------
+1. **Partition the hard drive** using an Ubuntu livedisk, leaving the first four Win8 partitions be, to Ubuntu (~150g), its swap (~10g), the files (~150g), the Arch swap (~10g), and Arch (~150g).  Any recovery partitions, etc can also be added.  Everything but Windows should be ext4/swap.
 
-7. Install Ubuntu without grub (figure out how to disable grub install)
+2. **Install Arch** and grub (*do not delete /boot!*)
 
-8. Update repositories and upgrade Ubuntu
+Step 3: Install Ubuntu without Grub
+-----------------------------------
+Install Ubuntu without grub (figure out how to disable grub install)
 
-9. Update and [configure](Arch/ArchConfig.sh) Arch.
+Step 4: Update the Operating Systems
+------------------------------------
+1. Update repositories and upgrade Ubuntu
 
-10. Study for your quals tomorrow.
+2. Update and [configure](Arch/ArchConfig.sh) Arch.
+
+Step 0: Don't do this before your qualifying exams..
+----------------------------------------------------
+Study for your quals tomorrow.
 
 
 Troubleshooting
