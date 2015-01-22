@@ -71,9 +71,10 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 4. Configure Windows for dual booting with Linux
     1. Disable fastboot.
 	2. Disable some other things.
+	3. Set systohctime or something
 	
 5. Partition the drive.  I'm currently working with
-    > [four windows partitions](150G) Ubuntu(~150G) swap(10G) Files(~150G) swap(10G) Arch(~150G) [recovery partition, etc]
+    > four_windows_partitions(150G) Ubuntu(~150G) swap(10G) Files(~150G) swap(10G) Arch(~150G) [recovery partition, etc]
 
 6. Install Arch and grub
 
@@ -81,7 +82,7 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 
 8. Update repositories and upgrade Ubuntu
 
-9. Update the hell out of Arch
+9. Update and [configure](Arch/ArchConfig.sh)
 
 10. Study for your quals tomorrow.
 
