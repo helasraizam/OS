@@ -65,6 +65,27 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
    	   bcdboot c:\windows /s s: /f UEFI
    	   ```
 
+3. Update Windows to 8.1 to avoid overwriting grub later.
+    1. First, fully upgrade Win 8 (~1G).
+	2. Then, upgrade to 8.1.
+4. Configure Windows for dual booting with Linux
+    1. Disable fastboot.
+	2. Disable some other things.
+	
+5. Partition the drive.  I'm currently working with
+    > [four windows partitions](150G) Ubuntu(~150G) swap(10G) Files(~150G) swap(10G) Arch(~150G) [recovery partition, etc]
+
+6. Install Arch and grub
+
+7. Install Ubuntu without grub (figure out how to disable grub install)
+
+8. Update repositories and upgrade Ubuntu
+
+9. Update the hell out of Arch
+
+10. Study for your quals tomorrow.
+
+
 Troubleshooting
 ---------------
 
