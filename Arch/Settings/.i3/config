@@ -12,7 +12,7 @@ set $ws4 4: Gimp
 set $ws5 5: Social
 set $ws6 6
 set $ws7 7
-set $ws8 8
+set $ws8 8: config
 set $ws9 9: sync
 set $ws0 10: Music
 
@@ -72,6 +72,9 @@ exec --no-startup-id i3-msg 'workspace $ws5;exec urxvt -e irssi; workspace $ws1'
 
 # Dropbox (https://wiki.archlinux.org/index.php/dropbox)
 exec --no-startup-id ~/.dropbox-dist/dropboxd
+
+# Schedule
+exec --no-startup-id i3-msg 'workspace $ws8;exec emacs "/mnt/Helasraizam/{W}/Schedule/fortMonthly/sched.xml";workspace $ws8'
 
 
 ##################### Key bindings and such #######################
@@ -214,7 +217,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Function keys
+# Function keys (use xev to find)
 # Volume/Mic
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 10%+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 10%- unmute
@@ -225,4 +228,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 1
 bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 1
 # Lock
 bindsym XF86Tools exec --no-startup-id /usr/bin/i3lock
+# Print Screen
+bindsym Print exec --no-startup-id maim -s
 

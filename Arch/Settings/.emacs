@@ -12,7 +12,7 @@
 ;;;; Useful websites
 ; http://www.emacswiki.org/emacs/SmartTabs
 ; http://www.reddit.com/r/emacs/comments/1ijibv/how_to_get_gnu_indent_style_on_emacs_for_all/ (07-18-13 update)
-; http://www.emacswiki.org/emacs/IndentingC
+; http://www.emacswiki.org/emacs/Indenting
 
 ;;;; Helpful Reminders
 ; Get Current Mode...........C-h m
@@ -64,6 +64,10 @@
 (setq backward-delete-function nil) ; Do not expand tabs to spaces when deleting
 (add-hook 'html-mode-hook (lambda() 
 							(setq sgml-basic-offset 4) (setq indent-tabs-mode t)))
+
+;;;; yaml-mode
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\.yml\'" . yaml-mode))
 
 ;;;; Cua mode (copy/paste/cut keys)
 (setq-default delete-selection-mode 1)

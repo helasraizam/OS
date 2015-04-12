@@ -86,8 +86,8 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 
 Step 2: Install Ubuntu
 ----------------------
-1. **Partition the hard drive** using an Ubuntu livedisk, leaving the first four Win8 partitions be, to Ubuntu (~150g), its swap (~10g), the files (~150g), the Arch swap (~10g), and Arch (~150g).  Any recovery partitions, etc can also be added.  Everything but Windows should be ext4/swap.
-2. **Install Ubuntu** with grub.
+1. **Partition the hard drive** using an Ubuntu livedisk made with `dd if=ubuntu-14.10-desktop-amd64.iso of=/dev/sdb1 bs=512` with the obvious replacements, leaving the first four Win8 partitions be, to Ubuntu (~150g), its swap (~10g), the files (~150g), the Arch swap (~10g), and Arch (~150g).  Any recovery partitions, etc can also be added.  Everything but Windows should be ext4/swap.
+2. **Install Ubuntu** with grub.  [This](http://askubuntu.com/questions/221835/installing-ubuntu-on-a-pre-installed-windows-8-64-bit-system-uefi-supported) is a particularly insightful article covering the obstacles and solutions when it comes to uefi.
 3. **Upgrade Ubuntu** by enabling and introducing the proper repositories, updating, and downloading a few select apps.
 4. **Update configs** (to be added)
 5. **Delete grub** files on the second partition and *do not reboot* without installing Arch and its grub.
