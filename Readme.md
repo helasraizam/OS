@@ -84,6 +84,21 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 		```
 		to a DWORD of hexadecimal value 1.
 
+Step 2: Abandon Ubuntu and Install Arch
+---------------------------------------
+0. I've figured out pretty much everything on Ubuntu on Arch and haven't touched it since, and the Ubuntu USB won't boot anyway, so we'll go straight to Arch.  Suffice it to say if you already have an Ubuntu installation, installing Arch from that is simpler than through USB.  The rest of this section covers the [Arch Beginner's Guide](https://wiki.archlinux.org/index.php/Beginners%27_guide#Prepare_the_latest_installation_medium) in less detail, so you're better off following that.
+1. Prepare the Arch medium
+    1. [Download](https://www.archlinux.org/download/) a copy of the arch distribution you want.  Download to the same folder and from the same source the gpg key (*.iso.sig).
+	2. After both files are downloaded, check that the gpg key of the iso downloaded from the mirror matches the central archlinux gpg key with
+	```
+	gpg --verify [*].iso.sig
+	```
+	after adding the author's signature with
+	```
+	gpg --recv-keys [key id from gpg --very output]
+	```
+	3. 
+
 Step 2: Install Ubuntu
 ----------------------
 1. **Partition the hard drive** using an Ubuntu livedisk made with `dd if=ubuntu-14.10-desktop-amd64.iso of=/dev/sdb1 bs=512` with the obvious replacements, leaving the first four Win8 partitions be, to Ubuntu (~150g), its swap (~10g), the files (~150g), the Arch swap (~10g), and Arch (~150g).  Any recovery partitions, etc can also be added.  Everything but Windows should be ext4/swap.
