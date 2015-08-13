@@ -84,9 +84,14 @@ Days wasted tell me that the Windows installation disk I have doesn't even suppo
 		```
 		to a DWORD of hexadecimal value 1.
 
+4. **Resize the Windows partition** from within Windows itself to avoid shifting unmoveable files.
+   1. Open up `diskmgmt.msc` and use it to cut down the Windows partition.
+   2. Use defrag to move files around to make this more productive.
+   3. If all else fails, you can try reinstalling Win8 onto a pre-partitioned drive, or just force the partition resize from linux at a risk (try the latter before the former).
+
 Step 2: Abandon Ubuntu and Install Arch
 ---------------------------------------
-0. I've figured out pretty much everything on Ubuntu on Arch and haven't touched it since, and the Ubuntu USB won't boot anyway, so we'll go straight to Arch.  Suffice it to say if you already have an Ubuntu installation, installing Arch from that is simpler than through USB.  The rest of this section covers the [Arch Beginner's Guide](https://wiki.archlinux.org/index.php/Beginners%27_guide#Prepare_the_latest_installation_medium) in less detail, so you're better off following that.
+I've figured out pretty much everything on Ubuntu on Arch and haven't touched it since, and the Ubuntu USB won't boot anyway, so we'll go straight to Arch.  Suffice it to say if you already have an Ubuntu installation, installing Arch from that is simpler than through USB.  The rest of this section covers the [Arch Beginner's Guide](https://wiki.archlinux.org/index.php/Beginners%27_guide#Prepare_the_latest_installation_medium) in less detail, so you're better off following that.
 1. Prepare the Arch medium
     1. [Download](https://www.archlinux.org/download/) a copy of the arch distribution you want.  Download to the same folder and from the same source the gpg key (*.iso.sig).
 	2. After both files are downloaded, check that the gpg key of the iso downloaded from the mirror matches the central archlinux gpg key with
@@ -97,7 +102,94 @@ Step 2: Abandon Ubuntu and Install Arch
 	```
 	gpg --recv-keys [key id from gpg --very output]
 	```
-	3. 
+	3. Prepare the USB to be sacrificed and unmount it, run `lsblk` to make sure you know its name (/dev/sd*).  Now, copy the iso onto the USB with `dd` and `sync`.  Note: Don't put /dev/sdb1, just /dev/sdb.
+	```
+	sudo dd if=archlinux-[*].iso of=/dev/sd* bs=4M && sync
+	```
+	Note that there is no output, be patient.
+
+	4. Boot the USB key with the appropriate BIOS settings (UEFI ON).
+
+2. Install Arch from USB.
+
+   1. Here's the tricky part.  Run
+   ```
+   modprobe efivarfs
+   ```
+   immediately.
+   
+   2. Then set up an internet connection using standard methods (eg, wifi-menu)
+
+   3. Ensure clock accuracy:
+   ```
+   timedatectl set-ntp true
+   ```
+
+   4. Set up the partitions, including swap, /, and possibly home, using parted or fdisk.
+
+   5. `mkfs.ext4` and `mkswap`->`swapon` the appropriate partitions, then mount root:
+   ```
+   mount /dev/sd?? /mnt
+   ```
+
+   6. Mount boot:
+   ```
+   mkdir -p /mnt/boot
+   mount /dev/sd?? /mnt/boot
+   ```
+
+   7. Choose a mirror:
+   ```
+   nano /etc/pacman.d/mirrorlist
+   ```
+
+   8. Install base and some other things:
+   ```
+   pacstrap -i /mnt base base-devel iw wpa_supplicant dialog
+   ```
+
+   9. Save fstab with
+   ```
+   genfstab -U /mnt > /mnt/etc/fstab
+   ```
+
+   10. Finally, chroot into the system with
+   ```
+   arch-chroot /mnt /bin/bash
+   ```
+
+3. Making it bootable
+   1. Now,
+   ```
+   mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+   ```
+
+   2. Set regional settings by editing `/etc/locale.gen`, then generate with `locale-gen`.  Finally,
+   ```
+   echo LANG=en_US.UTF-8 > /etc/locale.conf
+   ```
+
+   3. Set the timezone with
+   ```
+   datetimectl set-timezone [timezone]
+   ```
+   from `/usr/share/zoneinfo`, then run
+   ```
+   hwclock --systohc --utc
+   ```
+
+   4. Create your hostname and `>` it to `/etc/hostname`, updating `/etc/hosts`
+
+   5. Set the root password with `passwd`
+
+   6. Configure a bootloader (grub)
+   ```
+   pacman -S grub os-prober
+   grub-install --recheck /dev/sda
+   grub-mkconfig -o /boot/grub/grub.cfg
+   ```
+
+   7. Crossing fingers, reboot!
 
 Step 2: Install Ubuntu
 ----------------------
