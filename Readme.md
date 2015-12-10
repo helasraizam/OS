@@ -108,15 +108,14 @@ I've figured out pretty much everything on Ubuntu on Arch and haven't touched it
 	```
 	Note that there is no output, be patient.
 
-	4. Boot the USB key with the appropriate BIOS settings (UEFI ON).
+	4. Boot the USB key with the appropriate BIOS settings (UEFI ON).  ***There are two entries for the USB, and one of them is UEFI (the one that you wouldn't choose first).  Make sure you're booted with EFI enabled by checking that `/sys/firmware/efi/efivars` exists.***
 
 2. Install Arch from USB.
 
-   1. Here's the tricky part.  Run
+   1. Run
    ```
    modprobe efivarfs
    ```
-   immediately.
    
    2. Then set up an internet connection using standard methods (eg, wifi-menu)
 
@@ -132,7 +131,7 @@ I've figured out pretty much everything on Ubuntu on Arch and haven't touched it
    mount /dev/sd?? /mnt
    ```
 
-   6. Mount boot:
+   6. Mount the EFI System directory on /mnt/boot:
    ```
    mkdir -p /mnt/boot
    mount /dev/sd?? /mnt/boot
@@ -143,10 +142,11 @@ I've figured out pretty much everything on Ubuntu on Arch and haven't touched it
    nano /etc/pacman.d/mirrorlist
    ```
 
-   8. Install base and some other things:
+   8. Install base and some other things (Note: if installing on an EFI with a previous Arch installation, remove /mnt/boot/vmlinuz-linux):
    ```
    pacstrap -i /mnt base base-devel iw wpa_supplicant dialog
    ```
+   This is a good step to leave overnight.
 
    9. Save fstab with
    ```
@@ -171,25 +171,46 @@ I've figured out pretty much everything on Ubuntu on Arch and haven't touched it
 
    3. Set the timezone with
    ```
-   datetimectl set-timezone [timezone]
+   ln -sf /usr/share/zoneinfo/*Zone*/*Subzone* /etc/localtime
    ```
    from `/usr/share/zoneinfo`, then run
    ```
    hwclock --systohc --utc
    ```
 
-   4. Create your hostname and `>` it to `/etc/hostname`, updating `/etc/hosts`
+   4. Create your hostname and `>` it to `/etc/hostname`, likewise updating `/etc/hosts` for both entries (IP.IP.IP.IP [myhostname].localdomain [myhostname]).
 
    5. Set the root password with `passwd`
 
    6. Configure a bootloader (grub)
    ```
-   pacman -S grub os-prober
-   grub-install --recheck /dev/sda
+   pacman -S grub efibootmgr os-prober
+   grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub --recheck
+   grub-mkconfig -o /boot/efi/EFI/GRUB/grub.cfg
+   ```
+   (Note: this didn't work this time, had to run
+   ```
+   grub-install --efi-directory=/boot --bootloader-id=[id] --recheck /dev/sda
    grub-mkconfig -o /boot/grub/grub.cfg
    ```
 
    7. Crossing fingers, reboot!
+
+4. Configure
+
+   1. Add a user
+   ```
+   groupadd {ssh,wireshark,tty}
+   useradd -mG sys,disk,lp,wheel,uucp,http,video,audio,optical,storage,scanner,power,users,ssh,tty,lock,printadmin,wireshark [username]
+   ```
+
+   2. Install yaourt
+
+   3. Install some things
+   ```
+   yaourt --noconfirm -S xorg-server i3 i3-gaps-git libreoffice emacs vlc firefox pipelight wireshark-qt thunar rxvt-unicode transmission-qt reflector wget tree  gimp xsane youtube-dl zip ttf-amiri ttf-computer-modern-fonts ttf-dejavu ttf-droid ttf-freefarsi ttf-freefont ttf-iran-nastaliq ttf-liberation ttf-mathtype ttf-ms-win8 ttf-irfonts ttf-borna ttf-x2 ttf-qurancomplex-fonts ttf-sil-scheherazade tor tor-browser-en texlive-bibtextra texlive-humanities texlive-latexextra texlive-langextra texlive-science sudo spotify sshfs skype smbclient sagemath python2-yaml python2-scipy python2-pillow python2-notify python2-numpy python2-crypto python2-beautifulsoup4 python2-astropy python-yaml python-urllib3 python-scipy python-rsa python-requests python-pyqt4 python-pyqt5 python-pygame python-pillow python-openpyxl python-numpy python-moviepy python-matplotlib python-httplib2 python-google-api-python-client python-beautifulsoup4 alsa-plugins archey arduino ardour baobab cheese colordiff cups diffpdf djvulibre dropbox dropbox-cli emacs-lyqi-mode-git emacs-python-mode espeak evince feedthebeast feh file-roller gnuplot google-chrome google-talkplugin gparted xte hplip-plugin htop imagemagick irssi ix libdvdcss lsof maim mathjax me_quran mediterraneannight-theme minecraft mlocate mlterm mumble ntfs-3g openssh pulseaudio 
+
+uninstall network-manager-applet 
 
 Step 2: Install Ubuntu
 ----------------------

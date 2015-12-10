@@ -9,12 +9,12 @@ set $ws1 1
 set $ws2 2
 set $ws3 3
 set $ws4 4: Gimp
-set $ws5 5: Social
+set $ws5 5: IRC
 set $ws6 6
 set $ws7 7
-set $ws8 8: config
-set $ws9 9: sync
-set $ws0 10: Music
+set $ws8 8
+set $ws9 9
+set $ws0 10: stream
 
 ##################### Aesthetics #######################
 font pango:DejaVu Sans Mono 8		 # Title Fonts
@@ -24,6 +24,11 @@ exec feh --bg-fill ~/Wallpapers/Arch.png # Background image
 new_window none
 new_float none
 #exec i3-msg border none
+
+# i3-gaps
+smart_gaps on
+gaps inner 20
+gaps outer -10
 
 
 # Colors
@@ -39,7 +44,7 @@ client.urgent           #2f343a #900000 #ffffff #900000
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status
+    status_command i3status | ~/i3status/wrapper.py
 	font pango:DejaVu Sans Mono 10
 	# Don't show workspace numbers
 	strip_workspace_numbers yes
@@ -61,6 +66,7 @@ assign [class="^Gimp$" instance="^gimp$"] $ws4
 assign [class="^Pidgin$" instance="^Pidgin$"] $ws5
 assign [class="^Unison-gtk2$" instance="^unison-gtk2$"] $ws9
 assign [class="^Spotify$" instance="^spotify$"] $ws10
+assign [class="^transmission$" instance="transmission-qt"] $ws10
 
 
 
@@ -74,7 +80,7 @@ exec --no-startup-id i3-msg 'workspace $ws5;exec urxvt -e irssi; workspace $ws1'
 exec --no-startup-id ~/.dropbox-dist/dropboxd
 
 # Schedule
-exec --no-startup-id i3-msg 'workspace $ws8;exec emacs "/mnt/Helasraizam/{W}/Schedule/fortMonthly/sched.xml";workspace $ws8'
+#exec --no-startup-id i3-msg 'workspace $ws8;exec emacs "/mnt/Helasraizam/{W}/Schedule/fortMonthly/sched.xml";workspace $ws8'
 
 
 ##################### Key bindings and such #######################
@@ -84,7 +90,8 @@ set $mod2 mod1
 bindsym $mod+$mod2+f exec --no-startup-id firefox
 bindsym $mod+$mod2+e exec --no-startup-id emacs
 bindsym $mod+$mod2+g exec --no-startup-id gimp
-bindsym $mod+$mod2+n exec --no-startup-id nautilus
+bindsym $mod+$mod2+t exec --no-startup-id thunar /mnt/Helasraizam/
+bindsym $mod+$mod2+m exec --no-startup-id transmission-qt
 bindsym $mod+$mod2+v exec --no-startup-id vlc
 
 
@@ -128,11 +135,11 @@ bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+# Move workspace
+bindsym $mod+Shift+Left move workspace to output left
+bindsym $mod+Shift+Down move workspace to output down
+bindsym $mod+Shift+Up move workspace to output up
+bindsym $mod+Shift+Right move workspace to output right
 
 # split in horizontal orientation
 bindsym $mod+h split h

@@ -26,6 +26,13 @@
 ;;;; Required imports
 (require 'compile)
 
+;;;; Package Management (https://www.youtube.com/watch?v=6BlTGPsjGJk#t=1169)
+(require 'package)
+(package-initialize)
+(add-to-list
+ 'package-archives
+ '("melpa" . "http://melpa.milkbox.net/packages/"))
+
 ;;;; External libraries
 (setq load-path (append (list (expand-file-name "~/usr/share/emacs/site-lisp")) load-path))
 ; Handle wsgi as python
@@ -34,6 +41,14 @@
 ;;;; Show column/line numbers
 (line-number-mode 1)
 (column-number-mode 1)
+
+;;;; Highlight over 80 cols
+;(require 'whitespace)
+;(setq whitespace-line-column 80) ;; limit line length
+;(setq whitespace-style '(face lines-tail))
+
+;(add-hook 'prog-mode-hook 'whitespace-mode)
+
 
 ;;;; AR/FA support
 (set-fontset-font
@@ -96,9 +111,10 @@
  '(TeX-newline-function (quote newline-and-indent))
  '(fill-column 80)
  '(inhibit-startup-screen t)
- '(matlab-indent-function-body t)
+ '(matlab-indent-function-body t t)
  '(matlab-shell-command "/usr/local/MATLAB/R2012a/bin/matlab")
  '(nxml-child-indent 4)
+ '(safe-local-variable-values (quote ((TeX-command-extra-options . "-shell-escape"))))
  '(word-wrap nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -106,3 +122,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;;; lilypond-init.el --- Startup code for LilyPond mode
+
+(autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
+(add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
+(add-to-list 'auto-mode-alist '("\\.ily$" . LilyPond-mode))
+(add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
+
