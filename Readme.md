@@ -193,6 +193,14 @@ I've figured out pretty much everything on Ubuntu on Arch and haven't touched it
    grub-install --efi-directory=/boot --bootloader-id=[id] --recheck /dev/sda
    grub-mkconfig -o /boot/grub/grub.cfg
    ```
+   )
+   When W10 inevitable overwrites grub, I got a "no space left on disk" error or "ioctl invalid" or something, for which I had to run
+   ```
+   grub-install --efi-directory=/boot --bootloader-id=[id] --target=x86_64-efi --removable
+   ```
+   as per some internet thread I'll link if I find.
+
+   Note: Turns out kernel updates are installed to /boot, so it's probably a good idea to set /boot as the mount point?  This means mounting /dev/sda1 (esp partition) to /boot directly, rather than /boot/efi (which would require copying the initramfs and vmlinuz files over to /boot/efi from /boot whenever there is a kernel update).  See [this](https://bbs.archlinux.org/viewtopic.php?id=178358) helpfule thread.
 
    7. Crossing fingers, reboot!
 
@@ -208,9 +216,13 @@ I've figured out pretty much everything on Ubuntu on Arch and haven't touched it
 
    3. Install some things
    ```
-   yaourt --noconfirm -S xorg-server i3 i3-gaps-git libreoffice emacs vlc firefox pipelight wireshark-qt thunar rxvt-unicode transmission-qt reflector wget tree  gimp xsane youtube-dl zip ttf-amiri ttf-computer-modern-fonts ttf-dejavu ttf-droid ttf-freefarsi ttf-freefont ttf-iran-nastaliq ttf-liberation ttf-mathtype ttf-ms-win8 ttf-irfonts ttf-borna ttf-x2 ttf-qurancomplex-fonts ttf-sil-scheherazade tor tor-browser-en texlive-bibtextra texlive-humanities texlive-latexextra texlive-langextra texlive-science sudo spotify sshfs skype smbclient sagemath python2-yaml python2-scipy python2-pillow python2-notify python2-numpy python2-crypto python2-beautifulsoup4 python2-astropy python-yaml python-urllib3 python-scipy python-rsa python-requests python-pyqt4 python-pyqt5 python-pygame python-pillow python-openpyxl python-numpy python-moviepy python-matplotlib python-httplib2 python-google-api-python-client python-beautifulsoup4 alsa-plugins archey arduino ardour baobab cheese colordiff cups diffpdf djvulibre dropbox dropbox-cli emacs-lyqi-mode-git emacs-python-mode espeak evince feedthebeast feh file-roller gnuplot google-chrome google-talkplugin gparted xte hplip-plugin htop imagemagick irssi ix libdvdcss lsof maim mathjax me_quran mediterraneannight-theme minecraft mlocate mlterm mumble ntfs-3g openssh pulseaudio 
-
-uninstall network-manager-applet 
+   yaourt --noconfirm -S xorg-server i3 i3-gaps-git libreoffice emacs vlc firefox pipelight wireshark-qt thunar rxvt-unicode transmission-qt reflector wget tree  gimp xsane youtube-dl zip ttf-amiri ttf-computer-modern-fonts ttf-dejavu ttf-droid ttf-freefarsi ttf-freefont ttf-iran-nastaliq ttf-liberation ttf-mathtype ttf-ms-win8 ttf-irfonts ttf-borna ttf-x2 ttf-qurancomplex-fonts ttf-sil-scheherazade tor tor-browser-en texlive-fontsextra texlive-bibtextra texlive-humanities texlive-latexextra texlive-langextra texlive-science texlive-biblatexextra sudo spotify sshfs skype smbclient sagemath python2-yaml python2-scipy python2-pillow python2-notify python2-numpy python2-crypto python2-beautifulsoup4 python2-astropy python-yaml python-urllib3 python-scipy python-rsa python-requests python-pyqt4 python-pyqt5 python-pygame python-pillow python-openpyxl python-numpy python-moviepy python-matplotlib python-httplib2 python-google-api-python-client python-beautifulsoup4 alsa-plugins archey arduino ardour baobab cheese colordiff cups diffpdf djvulibre dropbox dropbox-cli emacs-lyqi-mode-git emacs-python-mode espeak evince feedthebeast feh file-roller gnuplot google-chrome google-talkplugin gparted xte hplip-plugin htop imagemagick irssi ix libdvdcss lsof maim mathjax me_quran mediterraneannight-theme minecraft mlocate mlterm mumble ntfs-3g openssh pulseaudio pkgfile xorg-utils alsa-utils
+    ```
+	
+    4. Set up keyboard/X shortcuts
+	```
+	sudo localectl set-x11-keymap us,ir,fr "grp:shifts_toggle,terminate:ctrl_alt_bksp"
+	```
 
 Step 2: Install Ubuntu
 ----------------------
