@@ -243,4 +243,6 @@ Step 3: Install Arch
 Troubleshooting
 ---------------
 
-If at any time in Windows you want to know whether you're in UEFI mode, run msinfo32.
+1. If at any time in Windows you want to know whether you're in UEFI mode, run msinfo32.
+
+2. A recurring problem seems to be mounting /boot wrong or using /boot/efi or something, resulting in the bootloader running an older version of linux for which there no longer exist any modules, resulting in a meltdown when trying to boot.  To check if this is the case, see whether `uname -r` gives the same result as `pacman -Q linux`; if they don't match, downgrade with pacman -U to the linux version specified by `uname -r` in /var/cache/pacman/pkg/, then fix /etc/fstab, reboot, upgrade, reboot.
